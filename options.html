@@ -16,13 +16,26 @@
 
     <div class="form-group row">
       <div class="col-sm-2">
-        Naughty websites: <input type="text" class="form-control" id="websites"><br />
-        <label>
-          <input type="checkbox" id="playSound"> Play sound
-        </label> <br />
-        <label>
-          <input type="checkbox" id="displayPopup"> Display popup
-        </label> <br />
+        Naughty websites: <input type="text" class="form-control" id="websites">
+        <h3>Sounds</h3>
+        <div class="radio">
+          <label><input type="radio" id="playSound2" name="playSound" value="2">Default Sound</label>
+        </div>
+        <div class="radio">
+          <label><input type="radio" id="playSound1" name="playSound" value="1">Custom Audio URL: <input type="text" id="soundURL" />​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​</label>
+        </div>
+        <div class="radio">
+          <label><input type="radio" id="playSound0" name="playSound" value="0">None</label>
+        </div>
+        <br />
+        <h3>Popup</h3>
+        <div class="radio">
+          <label><input type="radio" id="displayPopup1" name="displayPopup" value="1">Custom: <input type="text" id="customPopup" />​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​</label>
+        </div>
+        <div class="radio">
+          <label><input type="radio" id="displayPopup0" name="displayPopup" value="0">None</label>
+        </div>
+        <br />
       </div>
     </div>
     <br />

@@ -3,7 +3,7 @@
 
   "name": "Shameful Gavin",
   "description": "You should be ashamed of yourself",
-  "version": "1.0.2",
+  "version": "1.0.3",
 
   "browser_action": {
     "default_icon": {

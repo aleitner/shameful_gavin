@@ -1,7 +1,9 @@
 const defaultOptions = {
-  websites: '',
-  displayPopup: false,
-  playSound: false
+  websites: 'www.pornhub.com, www.youporn.com',
+  displayPopup: '1',
+  playSound: '2',
+  customPopup: 'Don\'t you have something better to do?',
+  soundURL: ''
 };
 
 function getCurrentTab(callback) {
@@ -14,40 +16,51 @@ function getCurrentTab(callback) {
 }
 
 function shameHim(tab) {
-  chrome.storage.sync.get(defaultOptions, function(options) {
+  chrome.storage.sync.get(defaultOptions, function(opts) {
 
-    var websites = options.websites.split(',');
+    var websites = opts.websites.split(',');
 
     var url = new URL(tab.url)
     if (!websites.includes(url.hostname)) {
+      console.log('Current tab is not on a shameful URL')
       return
     }
+    console.log('Current tab is on a shameful URL')
 
-    if (options.playSound == true) {
-      var myAudio = new Audio();
-      myAudio.src = "shame.mp3";
-      myAudio.oncanplay = function() {
-        myAudio.play();
-        if (options.displayPopup == true) {
-          alert("Get off this website you naughty boi~")
-        }
+    if (opts.playSound !== '0') {
+      console.log('Audio will be played')
+      var audio;
+
+      if (opts.playSound === '1' && opts.soundURL !== '') {
+        console.log('Playing audio by URL: ', opts.soundURL)
+        audio = new Audio(opts.soundURL)
+      } else {
+
+        audio = new Audio();
+        audio.src = "shame.mp3";
+      }
+
+      audio.oncanplay = function() {
+        audio.play();
+        popupCheckAndDisplay(opts);
       };
+
+    } else {
+      console.log('No audio will be played')
+      popupCheckAndDisplay(opts);
     }
+
   });
 }
 
-// When there is a request made for preferences.
-chrome.runtime.onMessage.addListener(
-  function(request, sender, sendResponse) {
-    if (request.action === "getOptions") {
-      // Get preferences from local storage
-      chrome.storage.sync.get(defaultOptions, function(options) {
-        sendResponse(options);
-      }
-    );
+function popupCheckAndDisplay(opts) {
+  if (opts.displayPopup === '1') {
+    console.log('Displaying popup')
+    alert(opts.customPopup);
+  } else {
+    console.log('No popup will be display')
   }
-  return true;
-});
+}
 
 // When browseraction icon is clicked
 function click(e) {
@@ -57,7 +70,6 @@ function click(e) {
 chrome.tabs.onUpdated.addListener( function (tabId, changeInfo, tab) {
   if (changeInfo.status == 'complete') {
     getCurrentTab(function(currentTab) {
-      console.log(currentTab)
       shameHim(currentTab);
     });
   }

@@ -1,27 +1,27 @@
 const defaultOptions = {
-  websites: 'www.pornhub.com',
-  displayPopup: false,
-  playSound: false
+  websites: 'www.pornhub.com, www.youporn.com',
+  displayPopup: '1',
+  playSound: '2',
+  customPopup: 'Don\'t you have something better to do?',
+  soundURL: ''
 };
-
-function toggleDiv(id) {
-    var div = document.getElementById(id);
-    div.style.display = (div.style.display === "none") ? "block" : "none";
-}
 
 // Saves options to chrome.storage
 function save_options() {
 
   /* Account */
   var websites = document.getElementById('websites').value.replace(/\s/g, "");
-  var displayPopup = document.getElementById('displayPopup').checked;
-  var playSound = document.getElementById('playSound').checked;
-
+  var displayPopup = document.querySelector('input[name="displayPopup"]:checked').value;
+  var playSound = document.querySelector('input[name="playSound"]:checked').value;
+  var customPopup = document.getElementById('customPopup').value;
+  var soundURL = document.getElementById('soundURL').value;
 
   chrome.storage.sync.set({
     websites: websites,
     displayPopup: displayPopup,
-    playSound: playSound
+    playSound: playSound,
+    customPopup: customPopup,
+    soundURL: soundURL
   }, function() {
     // Update status to let user know options were saved.
     var status = document.getElementById('status');
@@ -38,9 +38,11 @@ function clear_options() {
 
   /* Account */
   chrome.storage.sync.set({
-    websites: "",
-    displayPopup: false,
-    playSound: false
+    websites: '',
+    displayPopup: '0',
+    playSound: '0',
+    customPopup: '',
+    soundURL: ''
   }, function() {
     // Update status to let user know options were saved.
     var status = document.getElementById('status');
@@ -62,8 +64,10 @@ function restore_options() {
   // Use default value color = 'red' and likesColor = true.
   chrome.storage.sync.get(defaultOptions, function(items) {
     document.getElementById('websites').value = items.websites;
-    document.getElementById('displayPopup').checked = items.displayPopup;
-    document.getElementById('playSound').checked = items.playSound;
+    document.getElementById('displayPopup'+items.displayPopup).checked = true;
+    document.getElementById('playSound'+items.playSound).checked = true;
+    document.getElementById('customPopup').value = items.customPopup;
+    document.getElementById('soundURL').value = items.soundURL;
   });
 }
 
