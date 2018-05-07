@@ -51,9 +51,7 @@ chrome.runtime.onMessage.addListener(
 
 // When browseraction icon is clicked
 function click(e) {
-  getCurrentTab(function(tab) {
-    shameHim(tab);
-  });
+  chrome.tabs.create({ 'url': 'chrome://extensions/?options=' + chrome.runtime.id });
 }
 
 chrome.tabs.onUpdated.addListener( function (tabId, changeInfo, tab) {
