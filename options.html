@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Shameful Gavin Options</title>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+</head>
+<body>
+
+<div class="col-xs-12 col-sm-12">
+  <form role="form" class='form-horizontal'>
+    <h3>Shameful Gavin Options</h3><br />
+
+    <div class="form-group row">
+      <div class="col-sm-2">
+        Naughty websites: <input type="text" class="form-control" id="websites"><br />
+        <label>
+          <input type="checkbox" id="playSound"> Play sound
+        </label> <br />
+        <label>
+          <input type="checkbox" id="displayPopup"> Display popup
+        </label> <br />
+      </div>
+    </div>
+    <br />
+
+    <div class="alert alert-success" role="alert" id="status" style="display: none;"></div>
+    <button type="button" class="btn btn-primary"id="save">Save settings</button>
+    <button type="button" class="btn btn-danger" id="clear">Clear settings</button>
+
+  </form>
+</div>
+<script src="options.js"></script>
+</body>
+</html>
