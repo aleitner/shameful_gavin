@@ -1,7 +1,7 @@
 const defaultOptions = {
-  websites: 'www.pornhub.com, www.xvideos.com, www.redtube.com, www.xhamster.com',
-  displayPopup: true,
-  playSound: true
+  websites: 'www.pornhub.com',
+  displayPopup: false,
+  playSound: false
 };
 
 function toggleDiv(id) {
